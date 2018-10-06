@@ -1,0 +1,16 @@
+.idea/*
+.mvn/*
+
+mvnw*
+
+*.class
+
+*.war
+*.jar
+*.ear
+
+target/
+*.iml
+*.log
+logs/
+*.sql
