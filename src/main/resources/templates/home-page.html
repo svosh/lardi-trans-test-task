@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+</head>
+<body>
+
+<form id="login-form" th:action="@{/home}" method="post"
+      th:object="${user}">
+
+    <div class="container">
+
+        <input type="hidden" name="login" id="login"
+               class="form-control"
+               placeholder="Login" th:filed="*{login}" th:value="*{login}"/>
+
+        <input type="hidden" name="id" id="userId"
+               class="form-control"
+               placeholder="Login" th:filed="*{id}" th:value="*{id}"/>
+
+        <input type="hidden" name="password" id="password"
+               class="form-control"
+               placeholder="Login" th:filed="*{password}" th:value="*{password}"/>
+
+        <input type="hidden" name="name" id="name"
+               class="form-control"
+               placeholder="Login" th:filed="*{name}" th:value="*{name}"/>
+
+        <div class="inner-addon left-addon">
+            <p><span th:field="*{login}" th:text="*{login}"></span> <b>'s contact list</b></p>
+        </div>
+
+        <div class="inner-addon right-addon">
+            <a class="btn btn-default" href="/logout">Logout</a>
+        </div>
+
+        <p/>
+
+        <div class="row clearfix">
+            <div class="col-md-12 table-responsive">
+                <table class="table table-bordered table-hover table-sortable" id="tab_logic">
+                    <thead>
+                    <tr>
+                        <th class="text-center">
+                            Last name
+                        </th>
+                        <th class="text-center">
+                            First name
+                        </th>
+                        <th class="text-center">
+                            Patronymic
+                        </th>
+                        <th class="text-center">
+                            Email
+                        </th>
+                        <th class="text-center">
+                            Address
+                        </th>
+                        <th class="text-center">
+                            Mobile number
+                        </th>
+                        <th class="text-center">
+                            Home number
+                        </th>
+                        <th class="text-center" style="border-top: 1px solid #ffffff; border-right: 1px solid #ffffff;">
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="userPhoneBookRow, itemStat : *{userPhoneBook}">
+                        <td><input th:field="*{userPhoneBook[__${itemStat.index}__].lastName}"/></td>
+                        <td><input th:field="*{userPhoneBook[__${itemStat.index}__].firstName}"/></td>
+                        <td><input th:field="*{userPhoneBook[__${itemStat.index}__].patronymic}"/></td>
+                        <td><input th:field="*{userPhoneBook[__${itemStat.index}__].email}"/></td>
+                        <td><input th:field="*{userPhoneBook[__${itemStat.index}__].address}"/></td>
+                        <td><input th:field="*{userPhoneBook[__${itemStat.index}__].mobilePhoneNumber}"/></td>
+                        <td><input th:field="*{userPhoneBook[__${itemStat.index}__].homePhoneNumber}"/></td>
+                        <td data-name="del">
+                            <button name="del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'
+                                    onClick="$(this).closest('tr').remove();"></button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a id="add_row" class="btn btn-default pull-right" th:href="@{'/home/add-new-contact?userName=' + *{login}}">Add new contact</a>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <input type="submit" name="save" id="save"
+                       tabindex="4"
+                       class="form-control btn btn-login" value="Save changes" style="background:lightgreen"/>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

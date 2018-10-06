@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <title>New contact page</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" id="bootstrap-css"/>
+
+    <link rel="shortcut icon" href=""/>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <form id="register-form" th:action="@{/home/add-new-contact}" method="post"
+                  th:object="${phoneBookRow}">
+
+                <input type="hidden" name="userName" id="userName"
+                       class="form-control"
+                       th:object="${userName}" th:value="${userName}"/>
+
+                <div class="form-group">
+                    <input type="text" name="lastName" id="lastName" tabindex="1"
+                           class="form-control"
+                           placeholder="Last name" value="" th:field="*{lastName}"/>
+                    <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</td>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="firstName" id="firstName" tabindex="2"
+                           class="form-control" placeholder="First name" th:field="*{firstName}"/>
+                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error
+                    </td>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="patronymic" id="patronymic" tabindex="3"
+                           class="form-control" placeholder="Patronymic" th:filed="*{patronymic}"/>
+                    <td th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}">Patronymic
+                        error
+                    </td>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" id="email" tabindex="4"
+                           class="form-control" placeholder="Email" th:filed="*{email}"/>
+                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
+                        error
+                    </td>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="address" id="address" tabindex="5"
+                           class="form-control" placeholder="Address" th:filed="*{address}"/>
+                    <td th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address
+                        error
+                    </td>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="mobilePhoneNumber" id="mobilePhoneNumber" tabindex="6"
+                           class="form-control" placeholder="Mobile phone number" th:filed="*{mobilePhoneNumber}"/>
+                    <td th:if="${#fields.hasErrors('mobilePhoneNumber')}" th:errors="*{mobilePhoneNumber}">Mobile phone
+                        number
+                        error
+                    </td>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="homePhoneNumber" id="homePhoneNumber" tabindex="7"
+                           class="form-control" placeholder="Home phone number" th:filed="*{homePhoneNumber}"/>
+                    <td th:if="${#fields.hasErrors('homePhoneNumber')}" th:errors="*{homePhoneNumber}">Home phone number
+                        error
+                    </td>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit" name="submit" id="submit"
+                                   tabindex="4" class="form-control btn btn-register"
+                                   value="Save"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
