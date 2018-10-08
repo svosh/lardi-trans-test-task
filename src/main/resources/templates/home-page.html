@@ -9,6 +9,42 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #myInput {
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+
+        #myTable {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ddd;
+            font-size: 18px;
+        }
+
+        #myTable th, #myTable td {
+            text-align: left;
+            padding: 12px;
+        }
+
+        #myTable tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        #myTable tr.header, #myTable tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -45,7 +81,33 @@
 
         <div class="row clearfix">
             <div class="col-md-12 table-responsive">
-                <table class="table table-bordered table-hover table-sortable" id="tab_logic">
+
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        <input type="text" id="myInputByLastName" onkeyup="myFunction(0, 'myInputByLastName')"
+                               placeholder="Search for last names.." title="Type in a name">
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        <input type="text" id="myInputByFirstName" onkeyup="myFunction(1, 'myInputByFirstName')"
+                               placeholder="Search for first names.." title="Type in a name">
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        <input type="text" id="myInputByMobileNumber" onkeyup="myFunction(5, 'myInputByMobileNumber')"
+                               placeholder="Search for mobile number.." title="Type in a number">
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        <input type="text" id="myInputByHomeNumber" onkeyup="myFunction(6, 'myInputByHomeNumber')"
+                               placeholder="Search for home number.." title="Type in a number">
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover table-sortable" id="contactTable">
                     <thead>
                     <tr>
                         <th class="text-center">
@@ -93,7 +155,8 @@
                 </table>
             </div>
         </div>
-        <a id="add_row" class="btn btn-default pull-right" th:href="@{'/home/add-new-contact?userName=' + *{login}}">Add new contact</a>
+        <a id="add_row" class="btn btn-default pull-right" th:href="@{'/home/add-new-contact?userName=' + *{login}}">Add
+            new contact</a>
     </div>
 
     <div class="form-group">
@@ -105,6 +168,27 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function myFunction(columnIndex, inputId) {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById(inputId);
+            filter = input.value.toUpperCase();
+            table = document.getElementById("contactTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[columnIndex];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
 </form>
 </body>
 </html>
