@@ -6,7 +6,6 @@ mvnw*
 *.class
 
 *.war
-*.jar
 *.ear
 
 target/
